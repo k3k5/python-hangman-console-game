@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class hangman_start:
+class hangman_drawings:
 
 
     def get_title(self):
