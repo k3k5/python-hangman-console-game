@@ -5,15 +5,31 @@ from random import randint
 
 usedLetters = []
 
-def start_game():
+def csvReader():
+    wordlist = []
+    table = {
+            ord(u'ä'): u'ae',
+            ord(u'ö'): u'oe',
+            ord(u'ü'): u'ue',
+            ord(u'Ä'): u'ae',
+            ord(u'Ö'): u'oe',
+            ord(u'Ü'): u'ue',
+            ord(u'ß'): u'ss'
+            }
 
+    with open ('defaultWords.csv', 'rb') as csvfile:
+        words = csv.reader(csvfile, delimiter='\n')
+        for row in words:
+            wordlist.append(row[0].decode('utf8').translate(table))
+    return wordlist
+
+def start_game():
     step = 0
     counter = 0
 
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
-
 """)
     print """
 ------------------------------------------------------------------------------------------------------------------------
@@ -22,11 +38,17 @@ Klick doch mal auf Enter um nachzusehen!
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
     """
-    word = "test"
+    wordList = csvReader()
+    word = wordList[randint(0, len(wordList))]
     word = preProcessWord(word)
-    print "Dein Wort: " + word[2] + " ( " + str(word[1]) + " Buchstaben )"
+    print "Dein Wort: " + " ".join(word[2]) + " ( " + str(word[1]) + " Buchstaben ) \b"
     for i in range(0, 10):
-        print "Benutzte Buchstaben: " + str(usedLetters)
+        for j in range(0, len(word[2])):
+            for k in range(0, len(usedLetters)):
+                if word[0][j] == usedLetters[k]:
+                    word[2][j] = usedLetters[k]
+        if i != 0:
+            print "Dein Wort: " + " ".join(word[2]) + "\n"
         letter = getUserInput(word)
         if letter in word[0]:
             if letter not in usedLetters:
@@ -48,7 +70,7 @@ def preProcessWord(word):
     underscored = ""
     for i in range(0, len(word)):
         underscored += " _"
-    processedWord = [list(word.upper()), len(list(word.upper())), underscored]
+    processedWord = [list(word.upper()), len(list(word.upper())), underscored.split()]
     return processedWord
 
 def getUserInput(word):
@@ -69,20 +91,15 @@ eingibst. Aber Achtung: du kannst nur Buchstaben (egal ob groß oder klein) eing
 im Spiel nicht vorkommen. Deshalb solltest du sie auch nicht eintippen!
 Du hast für jedes Spiel 10 Leben, die dir als Hangman angezeigt werden. Jeder vollständige Strich bedeutet, dass du ein
 weiteres Leben verloren hast. Sobald der Hangman vollständig am Galgen baumelt, heißt es für dich:
-
                                         GAME OVER!
-
 Aber keine Angst: du kannst direkt im Anschluss einen weiteren Versuch wagen.
-
 Wir haben genügend Hangmans vorrätig!
-
 Und wir haben ein kleines Gimmick für dich: Solltest du dich bei den von uns ausgewählten Worten langweilen, dann kannst
 du gerne eigene Wortlisten als .csv-Datei erstellen und einfach im Dateiordner ersetzen!
     """
 
 def get_title():
     hangman_title = """
-
 ()    ()    ()()    ()   ()   ())))))   ()      ()    ()()    ()   ()
 ()    ()   ()  ()   ())) ()  ()         ()))  ((()   ()  ()   ())) ()
 ()(())()  ()(())()  () ()()  ()   ))))  () (()) ()  ()(())()  () ()()
@@ -109,12 +126,6 @@ ____________________|/
             """
     elif step == 1:
         return """
-
-
-
-
-
-
  ______________________
 /                     /|
                      / |
@@ -124,7 +135,6 @@ ____________________|/
             """
     elif step == 2:
         return """
-
      |
      |
      |
@@ -245,24 +255,3 @@ ____________________|/
 
 #starting the game
 start_game()
-
-
-wordlist = []
-table = {
-        ord(u'ä'): u'ae',
-        ord(u'ö'): u'oe',
-        ord(u'ü'): u'ue',
-        ord(u'Ä'): u'ae',
-        ord(u'Ö'): u'oe',
-        ord(u'Ü'): u'ue',
-        ord (u'ß'): u'ss'
-        }
-
-with open ('defaultWords.csv', 'rb') as csvfile:
-    words = csv.reader(csvfile, delimiter='\n')
-    for row in words:
-        wordlist.append(row[0])
-
-    for word in wordlist:
-            s = word.decode('utf8')
-            print s.translate(table)
