@@ -2,6 +2,8 @@
 
 from random import randint
 
+usedLetters = []
+
 def start_game():
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
@@ -16,6 +18,8 @@ Klick doch mal auf Enter um nachzusehen!
 ------------------------------------------------------------------------------------------------------------------------
     """
     startWord()
+    usedLetters.append(getUserInput())
+    print usedLetters
 
 def show_startUp():
     print get_title()
@@ -202,9 +206,15 @@ ____________________|/
             """
 
 def startWord():
-    print randint(0,9)
-    print "_ _ _ _ _ _ _ _"
+    placeholder = ""
+    numberOfLetters = randint(0, 10)
+    for i in range(0, numberOfLetters):
+        placeholder += "_ "
 
+    print "Wort: " + placeholder + "( " + str(numberOfLetters) + " Buchstaben )"
 
+def getUserInput():
+    return raw_input("Dein Buchstabe: ")
 
+#starting the game
 start_game()
