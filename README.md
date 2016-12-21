@@ -27,6 +27,8 @@ Little implementation of the game "Hangman" in Python for an university course.
     * Buchstabe wird ebenfalls in der Liste der bereits verwendeten Buchstaben gespeichert
     * Prüfen, ob Hangman komplett ist mit Hilfe eines rückwärtslaufenden Counters. Der Counter beginnt bei der Anzahl der Leben und endet bei 0
   * Hangman noch nicht vollständig: Aufforderung an den Nutzer, den nächsten Buchstaben einzugeben.
+
 - Hangman vollständig: Game Over-Anzeige wird eingeblendet
+
   * c) Fehlermeldung bei einer unzulässigen Eingabe des Nutzers anzeigen (=Zahl, Sonderbuchstabe oder bereits verwendeter Buchstabe)
   * im Anschluss neuen Buchstaben eingeben lassen
