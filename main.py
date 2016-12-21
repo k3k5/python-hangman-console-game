@@ -7,6 +7,7 @@ usedLetters = []
 def start_game():
 
     step = 0
+    counter = 0
 
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
@@ -22,12 +23,25 @@ Klick doch mal auf Enter um nachzusehen!
     """
     word = "test"
     word = preProcessWord(word)
-    letter = getUserInput(word)
-    if letter in word[0]:
-        print 1
-    else:
-        usedLetters.append(letter)
-        print get_hangman(len(usedLetters))
+    print "Dein Wort: " + word[2] + " ( " + str(word[1]) + " Buchstaben )"
+    for i in range(0, 10):
+        print "Benutzte Buchstaben: " + str(usedLetters)
+        letter = getUserInput(word)
+        if letter in word[0]:
+            if letter not in usedLetters:
+                counter += 1
+                usedLetters.append(letter)
+        else:
+            usedLetters.append(letter)
+            step += 1
+            print get_hangman(step)
+    print """
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                GAME OVER!
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+    """
 
 def preProcessWord(word):
     underscored = ""
@@ -38,7 +52,11 @@ def preProcessWord(word):
 
 def getUserInput(word):
     letter = raw_input("Dein Buchstabe: ")
-    return letter.upper()
+    if letter not in usedLetters:
+        return letter.upper()
+    else:
+        letter = raw_input("Neuer Versuch! Diesen Buchstaben hast du schon genutzt!")
+        return letter
 
 def show_startUp():
     print get_title()
@@ -48,7 +66,7 @@ Zur Erklärung des Spiels:
 Bei diesem Spiel errätst du Wörter! Das machst du, indem du einzelne Buchstaben mit deiner Tastatur in die Konsole
 eingibst. Aber Achtung: du kannst nur Buchstaben (egal ob groß oder klein) eingeben, Zahlen und Sonderzeichen werden
 im Spiel nicht vorkommen. Deshalb solltest du sie auch nicht eintippen!
-Du hast für jedes Spiel 9 Leben, die dir als Hangman angezeigt werden. Jeder vollständige Strich bedeutet, dass du ein
+Du hast für jedes Spiel 10 Leben, die dir als Hangman angezeigt werden. Jeder vollständige Strich bedeutet, dass du ein
 weiteres Leben verloren hast. Sobald der Hangman vollständig am Galgen baumelt, heißt es für dich:
 
                                         GAME OVER!
