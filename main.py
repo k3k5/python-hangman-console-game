@@ -48,7 +48,7 @@ Klick doch mal auf Enter um nachzusehen!
                 if word[0][j] == usedLetters[k]:
                     word[2][j] = usedLetters[k]
         if i != 0:
-            print "Dein Wort: " + " ".join(word[2]) + "\n"
+            print "Dein Wort:  " + " ".join(word[2]) + "\n"
         letter = getUserInput(word)
         if letter in word[0]:
             if letter not in usedLetters:
