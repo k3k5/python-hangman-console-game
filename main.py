@@ -244,3 +244,26 @@ ____________________|/
 
 #starting the game
 start_game()
+
+
+import csv
+
+wordlist = []
+table = {
+        ord(u'ä'): u'ae',
+        ord(u'ö'): u'oe',
+        ord(u'ü'): u'ue',
+        ord(u'Ä'): u'ae',
+        ord(u'Ö'): u'oe',
+        ord(u'Ü'): u'ue',
+        ord (u'ß'): u'ss'
+        }
+
+with open ('defaultWords.csv', 'rb') as csvfile:
+    words = csv.reader(csvfile, delimiter='\n')
+    for row in words:
+        wordlist.append(row[0])
+
+    for word in wordlist:
+            s = word.decode('utf8')
+            print s.translate(table)
