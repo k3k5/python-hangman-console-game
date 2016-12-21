@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import csv
 from random import randint
 
 usedLetters = []
@@ -245,8 +246,6 @@ ____________________|/
 #starting the game
 start_game()
 
-
-import csv
 
 wordlist = []
 table = {
