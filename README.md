@@ -7,6 +7,9 @@ The game is written in German Language and coded in Python 2.7.
 
 ## Contributors
 - k3k5
+- bekkkka
+- violetta41
+- Anna-Maria00660077
 
 ## Funktionsumfang
 
