@@ -1,4 +1,4 @@
-# python-hangman-console-game
+# Hangman console game >> Python
 
 Little implementation of the game "Hangman" in Python for an university course.
 
