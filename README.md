@@ -1,6 +1,9 @@
-# Hangman console game >> Python
+# Hangman console game
 
 Little implementation of the game "Hangman" in Python for an university course.
+
+## Language
+The game is written in German Language and coded in Python 2.7.
 
 ## Contributors
 - k3k5
