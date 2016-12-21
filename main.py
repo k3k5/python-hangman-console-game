@@ -5,6 +5,9 @@ from random import randint
 usedLetters = []
 
 def start_game():
+
+    step = 0
+
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
@@ -17,9 +20,25 @@ Klick doch mal auf Enter um nachzusehen!
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
     """
-    startWord()
-    usedLetters.append(getUserInput())
-    print usedLetters
+    word = "test"
+    word = preProcessWord(word)
+    letter = getUserInput(word)
+    if letter in word[0]:
+        print 1
+    else:
+        usedLetters.append(letter)
+        print get_hangman(len(usedLetters))
+
+def preProcessWord(word):
+    underscored = ""
+    for i in range(0, len(word)):
+        underscored += " _"
+    processedWord = [list(word.upper()), len(list(word.upper())), underscored]
+    return processedWord
+
+def getUserInput(word):
+    letter = raw_input("Dein Buchstabe: ")
+    return letter.upper()
 
 def show_startUp():
     print get_title()
@@ -204,17 +223,6 @@ ____________________/  /
                     | /
 ____________________|/
             """
-
-def startWord():
-    placeholder = ""
-    numberOfLetters = randint(0, 10)
-    for i in range(0, numberOfLetters):
-        placeholder += "_ "
-
-    print "Wort: " + placeholder + "( " + str(numberOfLetters) + " Buchstaben )"
-
-def getUserInput():
-    return raw_input("Dein Buchstabe: ")
 
 #starting the game
 start_game()
