@@ -25,8 +25,6 @@ def csvReader():
 
 def start_game():
     step = 0
-    counter = 0
-
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
@@ -40,6 +38,7 @@ Klick doch mal auf Enter um nachzusehen!
     """
     wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
+    print word
     word = preProcessWord(word)
     print "Dein Wort: " + " ".join(word[2]) + " ( " + str(word[1]) + " Buchstaben ) \b"
     for i in range(0, 10):
@@ -50,14 +49,16 @@ Klick doch mal auf Enter um nachzusehen!
         if i != 0:
             print "Dein Wort:  " + " ".join(word[2]) + "\n"
         letter = getUserInput(word)
-        if letter in word[0]:
-            if letter not in usedLetters:
-                counter += 1
-                usedLetters.append(letter)
-        else:
+        if letter not in usedLetters:
             usedLetters.append(letter)
-            step += 1
-            print get_hangman(step)
+            if letter not in word[0]:
+                step += 1
+                print get_hangman(step)
+
+        else:
+            print "Buchstabe bereits verwendet!"
+            print "Neuer Versuch."
+
     print """
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
@@ -75,11 +76,8 @@ def preProcessWord(word):
 
 def getUserInput(word):
     letter = raw_input("Dein Buchstabe: ")
-    if letter not in usedLetters:
-        return letter.upper()
-    else:
-        letter = raw_input("Neuer Versuch! Diesen Buchstaben hast du schon genutzt!")
-        return letter
+    return letter.upper()
+
 
 def show_startUp():
     print get_title()
