@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import re
+import os
 from random import randint
-import img2asciiart
 
-usedLetters = []
+LIFECOUNTER = 10
 
 def csvReader():
     wordlist = []
@@ -24,51 +25,113 @@ def csvReader():
             wordlist.append(row[0].decode('utf8').translate(table))
     return wordlist
 
+def clearScreen():
+    # cross platform clearscreen
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def showWinningTable():
+    print"""
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                    JUHUUUU WINNER :)
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+            """
+
+def showGameOverLabel(word):
+    print """
+
+Das gesuchte Wort waere gewesen: """ + "".join(word[0]) + """
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                     GAME OVER!
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+    """
+
+def headlineOutput():
+    print"""
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                   HANGMAN THE GAME
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+            """
+
 def start_game():
     step = 0
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
 """)
-    print img2asciiart.img2asciiart().create_ascii_art("start_game.png")
+    print """
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+                                                Spiel startet!
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+    """
+
+    clearScreen()
+
     wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
-    print word
+    #print word
     word = preProcessWord(word)
-    print "Dein Wort: " + " ".join(word[2]) + " ( " + str(word[1]) + " Buchstaben ) \b"
-    for i in range(0, 10):
-        for j in range(0, len(word[2])):
-            for k in range(0, len(usedLetters)):
-                if word[0][j] == usedLetters[k]:
-                    word[2][j] = usedLetters[k]
-        if i != 0:
-            print "Dein Wort:  " + " ".join(word[2]) + "\n"
-            letter = getUserInput(word)
-            if len(letter) == 0:
-                print "Leere Eingabe! Versuch es nochmal!"
 
-            elif len(letter) == 1:
-                if letter not in usedLetters:
-                    usedLetters.append(letter)
-                    if letter not in word[0]:
-                        step += 1
-                        print get_hangman(step)
-            else:
-                if letter[0] not in usedLetters:
-                    usedLetters.append(letter[0])
-                    if letter[0] not in word[0]:
-                        step += 1
-                        print get_hangman(step)
+    correctCharCounter = 0
+    usedLetters = []
+    print ""
+    while step < LIFECOUNTER:
+
+
+        headlineOutput()
+        print get_hangman(step)
+        print step
+
+
+        print "Dein Wort:  " + " ".join(word[2]) + "\n"
+
+        if correctCharCounter == word[1]:
+            showWinningTable()
+            break
+
+        letter = getUserInput()
+
+        clearScreen()
+
+        if len(letter) != 1:
+            print "Du sollst genau einen Buchstaben eingeben! Versuch es nochmal!"
+            continue
 
         else:
-            print "Buchstabe bereits verwendet!"
-            print "Neuer Versuch."
+            if re.match(r"[^a-zA-Z]", letter):
+                print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
+                continue
 
-    print img2asciiart.img2asciiart().create_ascii_art("hangman.jpg")
+            if letter in usedLetters:
+                print "Buchstabe bereits verwendet! Versuch es nochmal!"
+                continue
 
-    print """Das gesuchte Wort ist: """ + "".join(word[0])
+            else:
+                print ""
+                usedLetters.append(letter)
+                letterInWord = False
+                for i in range(0, word[1]):
+                    if letter == word[0][i]:
+                        word[2][i] = letter
+                        letterInWord = True
+                        correctCharCounter += 1
 
-    print img2asciiart.img2asciiart().create_ascii_art("game_over.jpg")
+                if letterInWord == False:
+                    step += 1
+
+
+    if step == LIFECOUNTER:
+        showGameOverLabel(word)
+
+
 
 def preProcessWord(word):
     underscored = ""
@@ -77,14 +140,14 @@ def preProcessWord(word):
     processedWord = [list(word.upper()), len(list(word.upper())), underscored.split()]
     return processedWord
 
-def getUserInput(word):
+def getUserInput():
     letter = raw_input("Dein Buchstabe: ")
     return letter.upper()
 
 
 def show_startUp():
+    clearScreen()
     print get_title()
-    print get_hangman(0)
     print """
 Zur Erklärung des Spiels:
 Bei diesem Spiel errätst du Wörter! Das machst du, indem du einzelne Buchstaben mit deiner Tastatur in die Konsole
@@ -112,21 +175,12 @@ def get_title():
 def get_hangman(step):
     if step == 0:
         return """
-     ____________
-     |          |
-     |          @
-     |         /|\\
-     |          |
-     |         / \\
- ____|_________________
-/    |                /|
-                     / |
-____________________/  /
-                    | /
-____________________|/
-            """
-    elif step == 1:
-        return """
+
+
+
+
+
+
  ______________________
 /                     /|
                      / |
@@ -134,8 +188,24 @@ ____________________/  /
                     | /
 ____________________|/
             """
+    elif step == 1:
+        return """
+
+     |
+     |
+     |
+     |
+     |
+ ____|_________________
+/    |                /|
+                     / |
+____________________/  /
+                    | /
+____________________|/
+            """
     elif step == 2:
         return """
+     ____________
      |
      |
      |
@@ -151,7 +221,7 @@ ____________________|/
     elif step == 3:
         return """
      ____________
-     |
+     |          |
      |
      |
      |
@@ -167,7 +237,7 @@ ____________________|/
         return """
      ____________
      |          |
-     |
+     |          @
      |
      |
      |
@@ -183,8 +253,8 @@ ____________________|/
      ____________
      |          |
      |          @
-     |
-     |
+     |          |
+     |          |
      |
  ____|_________________
 /    |                /|
@@ -198,7 +268,7 @@ ____________________|/
      ____________
      |          |
      |          @
-     |          |
+     |         /|
      |          |
      |
  ____|_________________
@@ -213,7 +283,7 @@ ____________________|/
      ____________
      |          |
      |          @
-     |         /|
+     |         /|\\
      |          |
      |
  ____|_________________
@@ -230,21 +300,6 @@ ____________________|/
      |          @
      |         /|\\
      |          |
-     |
- ____|_________________
-/    |                /|
-                     / |
-____________________/  /
-                    | /
-____________________|/
-            """
-    else:
-        return """
-     ____________
-     |          |
-     |          @
-     |         /|\\
-     |          |
      |         /
  ____|_________________
 /    |                /|
@@ -253,6 +308,23 @@ ____________________/  /
                     | /
 ____________________|/
             """
+    elif step == 9:
+            return """
+     ____________
+     |          |
+     |          @
+     |         /|\\
+     |          |
+     |         / \\
+ ____|_________________
+/    |                /|
+                     / |
+____________________/  /
+                    | /
+____________________|/
+            """
+    else:
+        return ""
 
 #starting the game
 start_game()
