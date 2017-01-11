@@ -3,7 +3,7 @@
 Little implementation of the game "Hangman" in Python for an university course.
 
 ![hangman_image](https://lh5.ggpht.com/Uz8u6HRnoQffXamOEYMcrENi4D6buhw7CXjMBdeeTYGmw0AvXdrn9BsZs92SWIdJWg0=w300)
-(Image-Source: https://lh5.ggpht.com/Uz8u6HRnoQffXamOEYMcrENi4D6buhw7CXjMBdeeTYGmw0AvXdrn9BsZs92SWIdJWg0=w300)
+<sub><sup>(Image-Source: https://lh5.ggpht.com/Uz8u6HRnoQffXamOEYMcrENi4D6buhw7CXjMBdeeTYGmw0AvXdrn9BsZs92SWIdJWg0=w300)</sup></sub>
 
 ## Language
 The game is written in German Language and coded in Python 2.7.
