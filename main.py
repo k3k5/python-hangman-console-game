@@ -2,6 +2,7 @@
 
 import csv
 from random import randint
+import img2asciiart
 
 usedLetters = []
 
@@ -29,13 +30,7 @@ def start_game():
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
 """)
-    print """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                Spiel startet!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
+    print img2asciiart.img2asciiart().create_ascii_art("start_game.png")
     wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
     print word
@@ -48,24 +43,32 @@ Klick doch mal auf Enter um nachzusehen!
                     word[2][j] = usedLetters[k]
         if i != 0:
             print "Dein Wort:  " + " ".join(word[2]) + "\n"
-        letter = getUserInput(word)
-        if letter not in usedLetters:
-            usedLetters.append(letter)
-            if letter not in word[0]:
-                step += 1
-                print get_hangman(step)
+            letter = getUserInput(word)
+            if len(letter) == 0:
+                print "Leere Eingabe! Versuch es nochmal!"
+
+            elif len(letter) == 1:
+                if letter not in usedLetters:
+                    usedLetters.append(letter)
+                    if letter not in word[0]:
+                        step += 1
+                        print get_hangman(step)
+            else:
+                if letter[0] not in usedLetters:
+                    usedLetters.append(letter[0])
+                    if letter[0] not in word[0]:
+                        step += 1
+                        print get_hangman(step)
 
         else:
             print "Buchstabe bereits verwendet!"
             print "Neuer Versuch."
 
-    print """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                GAME OVER!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
+    print img2asciiart.img2asciiart().create_ascii_art("hangman.jpg")
+
+    print """Das gesuchte Wort ist: """ + "".join(word[0])
+
+    print img2asciiart.img2asciiart().create_ascii_art("game_over.jpg")
 
 def preProcessWord(word):
     underscored = ""

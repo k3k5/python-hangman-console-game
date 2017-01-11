@@ -38,3 +38,11 @@ The game is written in German Language and coded in Python 2.7.
 
   * c) Fehlermeldung bei einer unzulässigen Eingabe des Nutzers anzeigen (=Zahl, Sonderbuchstabe oder bereits verwendeter Buchstabe)
   * im Anschluss neuen Buchstaben eingeben lassen
+
+- Bei vielen Ausgaben des Programms (Spielstart, Spielende und die einzelnen Hangmans) werden Bilder in ASCII-Art angezeigt, die durch Bilder erzeugt werden (Game-Start und Spielende) bzw. durch vorgefertigte Hangmans (manuell eingetippt)
+
+- Während des Spiels wird für einen besseren Überblick über den Spielverlauf bei jedem Spielschritt die Konsole "geleert". Das heißt, dass alle vorherigen Konsolenausgaben mit der Funktion clear_board() geleert.
+
+  * def clear_board():
+    os.system('cls' if os.name=='nt' else 'clear')
+    >> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console
