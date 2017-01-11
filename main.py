@@ -75,8 +75,6 @@ Klick doch mal auf Enter um nachzusehen!
                 print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
 
     if step == 10:
-        print """
-=======
     print """
 
 Das gesuchte Wort ist: """ + "".join(word[0]) + """
