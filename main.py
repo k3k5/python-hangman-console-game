@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import csv
-import re
 from random import randint
+import img2asciiart
 
 usedLetters = []
 
@@ -26,18 +26,11 @@ def csvReader():
 
 def start_game():
     step = 0
-
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
 """)
-    print """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                Spiel startet!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
+    print img2asciiart.img2asciiart().create_ascii_art("start_game.png")
     wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
     print word
@@ -67,24 +60,15 @@ Klick doch mal auf Enter um nachzusehen!
                         step += 1
                         print get_hangman(step)
 
-            if letter in usedLetters:
-                print "Buchstabe bereits verwendet!"
-                print "Neuer Versuch."
+        else:
+            print "Buchstabe bereits verwendet!"
+            print "Neuer Versuch."
 
-            elif re.match(r"[^a-zA-Z]", letter):
-                print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
+    print img2asciiart.img2asciiart().create_ascii_art("hangman.jpg")
 
-    if step == 10:
-        print """
+    print """Das gesuchte Wort ist: """ + "".join(word[0])
 
-Das gesuchte Wort ist: """ + "".join(word[0]) + """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                GAME OVER!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
-    #elif step <=10 and
+    print img2asciiart.img2asciiart().create_ascii_art("game_over.jpg")
 
 def preProcessWord(word):
     underscored = ""
