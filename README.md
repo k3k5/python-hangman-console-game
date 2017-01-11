@@ -38,3 +38,7 @@ The game is written in German Language and coded in Python 2.7.
 
   * c) Fehlermeldung bei einer unzulässigen Eingabe des Nutzers anzeigen (=Zahl, Sonderbuchstabe oder bereits verwendeter Buchstabe)
   * im Anschluss neuen Buchstaben eingeben lassen
+
+- Bei vielen Ausgaben des Programms (Spielstart, Spielende und die einzelnen Hangmans) werden Bilder in ASCII-Art angezeigt, die durch Bilder erzeugt werden (Game-Start und Spielende) bzw. durch vorgefertigte Hangmans (manuell eingetippt)
+
+- Während des Spiels wird für einen besseren Überblick über den Spielverlauf bei jedem Spielschritt die Konsole "geleert". Das heißt, dass alle vorherigen Konsolenausgaben mit dem Befehl os.system('cls') für Windows und os.system('clear') für Unix-basierte Rechner geleert.
