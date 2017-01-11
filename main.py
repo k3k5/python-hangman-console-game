@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
+import re
 from random import randint
 
 usedLetters = []
@@ -25,6 +26,7 @@ def csvReader():
 
 def start_game():
     step = 0
+
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
@@ -65,20 +67,29 @@ Klick doch mal auf Enter um nachzusehen!
                         step += 1
                         print get_hangman(step)
 
-        else:
-            print "Buchstabe bereits verwendet!"
-            print "Neuer Versuch."
+            if letter in usedLetters:
+                print "Buchstabe bereits verwendet!"
+                print "Neuer Versuch."
 
+<<<<<<< HEAD
+            elif re.match(r"[^a-zA-Z]", letter):
+                print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
+
+    if step == 10:
+        print """
+=======
     print """
 
 Das gesuchte Wort ist: """ + "".join(word[0]) + """
 
+>>>>>>> origin/master
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
                                                 GAME OVER!
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
     """
+    #elif step <=10 and
 
 def preProcessWord(word):
     underscored = ""
