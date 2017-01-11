@@ -26,6 +26,7 @@ def csvReader():
     return wordlist
 
 def clearScreen():
+    # does only work in console, not in pycharm 
     # cross platform clearscreen
     os.system('cls' if os.name == 'nt' else 'clear')
 
