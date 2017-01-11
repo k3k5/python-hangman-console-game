@@ -49,7 +49,10 @@ Klick doch mal auf Enter um nachzusehen!
         if i != 0:
             print "Dein Wort:  " + " ".join(word[2]) + "\n"
             letter = getUserInput(word)
-            if len(letter) == 1:
+            if len(letter) == 0:
+                print "Leere Eingabe! Versuch es nochmal!"
+
+            elif len(letter) == 1:
                 if letter not in usedLetters:
                     usedLetters.append(letter)
                     if letter not in word[0]:
@@ -67,6 +70,9 @@ Klick doch mal auf Enter um nachzusehen!
             print "Neuer Versuch."
 
     print """
+
+Das gesuchte Wort ist: """ + "".join(word[0]) + """
+
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
                                                 GAME OVER!
