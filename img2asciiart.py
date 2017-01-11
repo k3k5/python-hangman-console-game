@@ -42,8 +42,8 @@ zonebounds=[36,72,108,144,180,216,252]
 # open image and resize
 # experiment with aspect ratios according to font
  
-im=Image.open(r"unnamed.png") # Dateiname muss noch geändert werden
-im=im.resize((160, 75),Image.BILINEAR)
+im=Image.open(r"hangman.jpg")
+im=im.resize((80, 35),Image.BILINEAR)
 im=im.convert("L") # convert to mono
  
 # now, work our way over the pixels
