@@ -50,7 +50,7 @@ The game is written in German Language and coded in Python 2.7.
 
 - ASCII-Art (Kommentare entfernt)
 
-  ```
+```python
   from PIL import Image
 import random
 from bisect import bisect
@@ -85,12 +85,13 @@ for y in range(0,im.size[1]):
 
 print str
   ```
-  <sub><sup>>> Übernommen von: https://stevendkay.wordpress.com/2009/09/08/generating-ascii-art-from-photographs-in-python/</sup></sub>
+   <sub><sup>>> Übernommen von: https://stevendkay.wordpress.com/2009/09/08/generating-ascii-art-from-photographs-in-python/</sup></sub>
 
 
 - Leeren der Konsole:
+```python
+   def clear_board():
+   os.system('cls' if os.name=='nt' else 'clear'
+```
 
-  ```def clear_board():
-     os.system('cls' if os.name=='nt' else 'clear')
-  ```
-    <sub><sup>>> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console</sup></sub>
+   <sub><sup>>> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console</sup></sub>
