@@ -48,12 +48,19 @@ Klick doch mal auf Enter um nachzusehen!
                     word[2][j] = usedLetters[k]
         if i != 0:
             print "Dein Wort:  " + " ".join(word[2]) + "\n"
-        letter = getUserInput(word)
-        if letter not in usedLetters:
-            usedLetters.append(letter)
-            if letter not in word[0]:
-                step += 1
-                print get_hangman(step)
+            letter = getUserInput(word)
+            if len(letter) == 1:
+                if letter not in usedLetters:
+                    usedLetters.append(letter)
+                    if letter not in word[0]:
+                        step += 1
+                        print get_hangman(step)
+            else:
+                if letter[0] not in usedLetters:
+                    usedLetters.append(letter[0])
+                    if letter[0] not in word[0]:
+                        step += 1
+                        print get_hangman(step)
 
         else:
             print "Buchstabe bereits verwendet!"
