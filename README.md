@@ -46,6 +46,51 @@ The game is written in German Language and coded in Python 2.7.
 
 - Während des Spiels wird für einen besseren Überblick über den Spielverlauf bei jedem Spielschritt die Konsole "geleert". Das heißt, dass alle vorherigen Konsolenausgaben mit der Funktion clear_board() geleert.
 
-  * def clear_board():
-    os.system('cls' if os.name=='nt' else 'clear')
-    >> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console
+## Übernommener Code
+
+- ASCII-Art (Kommentare entfernt)
+
+  ```
+  from PIL import Image
+import random
+from bisect import bisect
+
+greyscale = [
+            " ",
+            " ",
+            ".,-",
+            "_ivc=!/|\\~",
+            "gjez2]/(YL)t[+T7Vf",
+            "mdK4ZGbNDXY5P*Q",
+            "W8KMA",
+            "#%$"
+            ]
+
+
+zonebounds=[36,72,108,144,180,216,252]
+
+
+im=Image.open(r"c:\test.jpg")
+im=im.resize((160, 75),Image.BILINEAR)
+im=im.convert("L") # convert to mono
+
+str=""
+for y in range(0,im.size[1]):
+    for x in range(0,im.size[0]):
+        lum=255-im.getpixel((x,y))
+        row=bisect(zonebounds,lum)
+        possibles=greyscale[row]
+        str=str+possibles[random.randint(0,len(possibles)-1)]
+    str=str+"\n"
+
+print str
+  ```
+  <sub><sup>>> Übernommen von: https://stevendkay.wordpress.com/2009/09/08/generating-ascii-art-from-photographs-in-python/</sup></sub>
+
+
+- Leeren der Konsole:
+
+  ```def clear_board():
+     os.system('cls' if os.name=='nt' else 'clear')
+  ```
+    <sub><sup>>> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console</sup></sub>
