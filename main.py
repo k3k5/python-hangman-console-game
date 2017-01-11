@@ -71,7 +71,6 @@ Klick doch mal auf Enter um nachzusehen!
                 print "Buchstabe bereits verwendet!"
                 print "Neuer Versuch."
 
-<<<<<<< HEAD
             elif re.match(r"[^a-zA-Z]", letter):
                 print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
 
@@ -81,8 +80,6 @@ Klick doch mal auf Enter um nachzusehen!
     print """
 
 Das gesuchte Wort ist: """ + "".join(word[0]) + """
-
->>>>>>> origin/master
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------
                                                 GAME OVER!
