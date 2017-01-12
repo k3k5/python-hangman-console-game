@@ -4,6 +4,7 @@ import csv
 import re
 import os
 from random import randint
+import img2asciiart
 
 LIFECOUNTER = 10
 
@@ -26,7 +27,6 @@ def csvReader():
     return wordlist
 
 def clearScreen():
-    # does only work in console, not in pycharm 
     # cross platform clearscreen
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -42,23 +42,12 @@ def showWinningTable():
 
 def showGameOverLabel(word):
     print """
+Das gesuchte Wort waere gewesen: """ + "".join(word[0])
+    print img2asciiart.img2asciiart.create_ascii_art(img2asciiart.img2asciiart(), "game_over.jpg", 100, 30)
 
-Das gesuchte Wort waere gewesen: """ + "".join(word[0]) + """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                     GAME OVER!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
 
 def headlineOutput():
-    print"""
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                   HANGMAN THE GAME
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-            """
+    print img2asciiart.img2asciiart.create_ascii_art(img2asciiart.img2asciiart(), "hangman.jpg", 80, 35)
 
 def start_game():
     step = 0
@@ -66,13 +55,7 @@ def start_game():
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
 """)
-    print """
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-                                                Spiel startet!
-------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------
-    """
+    print img2asciiart.img2asciiart.create_ascii_art(img2asciiart.img2asciiart(), "start_game.png", 100, 30)
 
     clearScreen()
 
@@ -164,24 +147,12 @@ du gerne eigene Wortlisten als .csv-Datei erstellen und einfach im Dateiordner e
     """
 
 def get_title():
-    hangman_title = """
-()    ()    ()()    ()   ()   ())))))   ()      ()    ()()    ()   ()
-()    ()   ()  ()   ())) ()  ()         ()))  ((()   ()  ()   ())) ()
-()(())()  ()(())()  () ()()  ()   ))))  () (()) ()  ()(())()  () ()()
-()    ()  ()    ()  ()  )))  ()     ))  ()      ()  ()    ()  ()  )))
-()    ()  ()    ()  ()   ()   ())))))   ()      ()  ()    ()  ()   ()
-        """
+    hangman_title = img2asciiart.img2asciiart.create_ascii_art(img2asciiart.img2asciiart(), "start_game.png", 100, 30)
     return hangman_title
 
 def get_hangman(step):
     if step == 0:
         return """
-
-
-
-
-
-
  ______________________
 /                     /|
                      / |
@@ -191,7 +162,6 @@ ____________________|/
             """
     elif step == 1:
         return """
-
      |
      |
      |
