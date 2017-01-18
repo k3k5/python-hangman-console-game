@@ -91,7 +91,7 @@ print str
 - Leeren der Konsole:
 ```python
    def clear_board():
-   os.system('cls' if os.name=='nt' else 'clear'
+   os.system('cls' if os.name=='nt' else 'clear')
 ```
 
    <sub><sup>>> Übernommen von: http://stackoverflow.com/questions/517970/how-to-clear-python-interpreter-console</sup></sub>
