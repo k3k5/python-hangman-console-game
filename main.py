@@ -61,7 +61,6 @@ Klick doch mal auf Enter um nachzusehen!
 
     wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
-    #print word
     word = preProcessWord(word)
 
     correctCharCounter = 0
@@ -72,7 +71,7 @@ Klick doch mal auf Enter um nachzusehen!
 
         headlineOutput()
         print get_hangman(step)
-        print step
+        print "Verbrauchte Leben: " + str(step) + " / " + str(LIFECOUNTER)
 
 
         print "Dein Wort:  " + " ".join(word[2]) + "\n"
@@ -86,16 +85,16 @@ Klick doch mal auf Enter um nachzusehen!
         clearScreen()
 
         if len(letter) != 1:
-            print "Du sollst genau einen Buchstaben eingeben! Versuch es nochmal!"
+            print '\033[91m' + "Du sollst genau einen Buchstaben eingeben! Versuch es nochmal!" + '\033[0m'
             continue
 
         else:
             if re.match(r"[^a-zA-Z]", letter):
-                print "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein."
+                print '\033[91m' + "Du hast ein ungültiges Zeichen eingegeben. Bitte gib nur Buchstaben von a-z ein." + '\033[0m'
                 continue
 
             if letter in usedLetters:
-                print "Buchstabe bereits verwendet! Versuch es nochmal!"
+                print '\033[91m' + "Buchstabe bereits verwendet! Versuch es nochmal!" + '\033[0m'
                 continue
 
             else:
