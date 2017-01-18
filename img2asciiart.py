@@ -55,7 +55,7 @@ print str
 
 class img2asciiart:
 
-    def create_ascii_art(self, img_src):
+    def create_ascii_art(self, img_src, width, height):
         greyscale = [
                     " ",
                     " ",
@@ -80,7 +80,7 @@ class img2asciiart:
         # experiment with aspect ratios according to font
 
         im=Image.open(img_src)
-        im=im.resize((80, 35),Image.BILINEAR)
+        im=im.resize((width, height),Image.BILINEAR)
         im=im.convert("L") # convert to mono
 
         # now, work our way over the pixels
@@ -96,3 +96,4 @@ class img2asciiart:
             str=str+"\n"
 
         print str
+        return ""
