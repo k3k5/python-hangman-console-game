@@ -7,9 +7,9 @@ from random import randint
 import img2asciiart
 
 LIFECOUNTER = 10
-
 def csvReader():
     wordlist = []
+
     table = {
             ord(u'ä'): u'ae',
             ord(u'ö'): u'oe',
@@ -24,7 +24,14 @@ def csvReader():
         words = csv.reader(csvfile, delimiter='\n')
         for row in words:
             wordlist.append(row[0].decode('utf8').translate(table))
+
+
+    input = raw_input("Wenn du die Wortliste des Spiels erweitern möchtest, tippe 'ja'")
+    if input == "ja":
+            word = raw_input("neues Wort: ")
+            wordlist.append(word)
     return wordlist
+
 
 def clearScreen():
     # cross platform clearscreen
@@ -45,6 +52,8 @@ def headlineOutput():
 
 def start_game():
     step = 0
+    wordList = csvReader()
+    #print wordList
     show_startUp()
     raw_input("""Aber genug zur Erklärung des Spiels, nachdem du den Text gelesen hast, sollte das System schon bereit sein!
 Klick doch mal auf Enter um nachzusehen!
@@ -53,7 +62,7 @@ Klick doch mal auf Enter um nachzusehen!
 
     clearScreen()
 
-    wordList = csvReader()
+    #wordList = csvReader()
     word = wordList[randint(0, len(wordList))]
     word = preProcessWord(word)
 
@@ -291,4 +300,5 @@ ____________________|/
         return ""
 
 #starting the game
+#userAppendsWord()
 start_game()
