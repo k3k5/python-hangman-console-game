@@ -7,6 +7,7 @@ from random import randint
 import img2asciiart
 
 LIFECOUNTER = 10
+#https://docs.python.org/2/library/csv.html
 def csvReader():
     wordlist = []
 
@@ -29,7 +30,7 @@ def csvReader():
     input = raw_input("Wenn du die Wortliste des Spiels erweitern möchtest, tippe 'ja'")
     if input == "ja":
             word = raw_input("neues Wort: ")
-            wordlist.append(word)
+            wordlist.append(word.decode('utf8').translate(table))
     return wordlist
 
 
